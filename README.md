@@ -1,1 +1,1 @@
-# infa_27.09.2021_Mansurov
+# infa_2021_Mansurov
