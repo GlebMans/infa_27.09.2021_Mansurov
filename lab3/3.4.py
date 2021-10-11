@@ -2,7 +2,6 @@ from random import randint
 import turtle
 
 
-number_of_turtles = 20
 steps_of_time_number = 100000
 
 cheperaha = [turtle.Turtle(shape='circle'), 0, 0, 3, 60, 0, -10]
