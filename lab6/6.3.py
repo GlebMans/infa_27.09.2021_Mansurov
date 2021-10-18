@@ -1,13 +1,13 @@
 import pygame
 import math
 from pygame.draw import *
-from random import randint
+from random import *
 pygame.init()
 
 FPS = 30
 screen = pygame.display.set_mode((1200, 900))
 
-steps_of_time_number = 2000
+steps_of_time_number = 1000
 
 number_of_balls = 3
 
@@ -42,14 +42,30 @@ def move():
     global x, y, Vx, Vy, dt
     
     if (x+r>=1200):
-        Vx=-Vx
+        Vx=int(-Vx - randint(-3,3))
+        if (abs(Vx>5)):
+            Vx=5
+        if (abs(Vx<0)):
+            Vx=-4
     if (x-r<=0):
-        Vx=-Vx
+        Vx=int(-Vx - randint(-3,3))
+        if (abs(Vx>5)):
+            Vx=5
+        if (abs(Vx<0)):
+            Vx=4
     
     if (y+r>=900):
-        Vy=-Vy
+        Vy=int(-Vy - randint(-3,3))
+        if (abs(Vy>5)):
+            Vy=5
+        if (abs(Vy<0)):
+            Vy=-4
     if (y-r<=0):
-        Vy=-Vy
+        Vy=int(-Vy - randint(-3,3))
+        if (abs(Vy>5)):
+            Vy=5
+        if (abs(Vy<0)):
+            Vy=4
     
     x=x+Vx*dt    
     y=y+Vy*dt
@@ -79,25 +95,38 @@ k=0
 
 
 while not finished:
+    br=0
+    
     clock.tick(FPS)
     
     new_ball()
-    for i in range(steps_of_time_number):
+    
+    Vx=randint(-3,3)
+    Vy=randint(-3,3)
+    
+    while (br==0):
         move()
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    finished = True
-            if event.type == pygame.QUIT:
-                finished = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if inside()==True:
+                    br=1
                     k=k+1
                     print("Your score is", k)
                     print()
                 else:
+                    br=0
                     print("Your score is still", k)
                     print()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if (br==1):
+                break
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
+                break
+        if event.type == pygame.QUIT:
+            break
+                
         circle(screen, color, (x, y), r)
         pygame.display.update()
         screen.fill(BLACK)
