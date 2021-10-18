@@ -7,8 +7,6 @@ pygame.init()
 FPS = 30
 screen = pygame.display.set_mode((1200, 900))
 
-steps_of_time_number = 1000
-
 number_of_balls = 3
 
 RED = (255, 0, 0)
@@ -31,11 +29,6 @@ def new_ball():
     circle(screen, color, (x, y), r)
 
 
-
-Vx=2
-Vy=2
-dt=1
-    
     
 def move():
     
@@ -93,9 +86,9 @@ finished = False
 
 k=0
 
-
-while not finished:
-    br=0
+br2=0
+while (br2!=1):
+    br1=0
     
     clock.tick(FPS)
     
@@ -109,22 +102,24 @@ while not finished:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if inside()==True:
-                    br=1
+                    br1=1
                     k=k+1
                     print("Your score is", k)
                     print()
                 else:
-                    br=0
+                    br1=0
                     print("Your score is still", k)
                     print()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if (br==1):
+            if (br1==1):
                 break
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
+                br2=1
                 break
         if event.type == pygame.QUIT:
+            br2=1
             break
                 
         circle(screen, color, (x, y), r)
