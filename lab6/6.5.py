@@ -65,18 +65,17 @@ def move1():
 
 def move2():
     global x, y, Vx, Vy, dt, a, Vy1
-    a=5
+    dt=1
+    a=0.05
     
-    Vy1=Vy-a*dt
-    Vy=Vy1
     
-    x=x+Vx*dt
-    y=y-V1y*dt+a*dt*dt/2
+    #Vy=Vy1
     
-    print(Vy)
+    
+    #print(Vy)
     if (y+r>=900):
-        Vy1=-1*Vy1
-        y=y-r/2
+        Vy=-Vy
+        #y=y-r/2
     
     if (x+r>=1200):
         Vx=-Vx
@@ -84,6 +83,15 @@ def move2():
     if (x-r<=0):
         Vx=-Vx
         x=x+10
+    
+    
+
+    x=x+Vx*dt
+    y=y-Vy*dt+a*dt*dt/2
+    
+    Vy=Vy-a*dt
+    
+    print(x)
 
 
 def inside():
@@ -119,7 +127,7 @@ while (br2!=1):
     Vx=randint(-3,3)
     Vy=randint(-3,3)
     
-    while (br==0):
+    while (br1==0):
         move2()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
